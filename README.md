@@ -59,50 +59,52 @@ print(best_prompt)
 
 ---
 
-## 🧬 架构
+## 🧬 Agent 自我进化
+
+### 作为 Tool 使用
+
+```python
+from spore_tool import create_spore_tool, SPORE_TOOL_SCHEMA
+
+# 创建 tool
+evolve_tool = create_spore_tool(llm_client)
+
+# 调用进化
+result = evolve_tool(
+    gene_type="system_prompt",
+    current_gene="你是一个有帮助的助手...",
+    feedback="用户说我回答太简短，没有深入分析",
+    goal="涌现出深度思考能力"
+)
+```
+
+### 效果示例
+
+**贝贝的进化轨迹：**
+
+```
+v1.0 → v2.0 → v3.0 → v4.0 → v5.0
+  │      │      │      │      │
+  ▼      ▼      ▼      ▼      ▼
+基本    多元    AI原生  概念   玄学
+助手    思考    推理    创造   大师
+```
+
+详见 [self-evolution.md](./self-evolution.md)
+
+---
+
+## 🧠 架构
 
 ```
 prompt-spore/
 ├── spore.py              # 核心引擎
-├── mutation/             # 变异策略
-│   ├── lexical.py        # 词法变异
-│   ├── structural.py     # 结构变异
-│   ├── llm_generated.py  # LLM 生成变异
-│   └── meta.py          # 元变异
-├── evaluator.py          # 评估器
-├── population.py         # 种群管理
-├── examples/             # 示例
-└── tests/               # 测试
+├── agent_spore.py        # Agent 自我进化工具
+├── spore_tool.py         # 可被 agent 调用的 Tool
+├── self-evolution.md     # 🧪 贝贝进化实验
+├── evolution-demo.md     # 进化过程记录
+└── README.md
 ```
-
----
-
-## 🔄 变异策略
-
-| 策略 | 描述 |
-|------|------|
-| **词法变异** | 替换关键词/短语 |
-| **结构变异** | 调整提示词结构 |
-| **风格变异** | 改变语气/风格 |
-| **逻辑变异** | 改进推理链 |
-| **LLM 变异** | 用 LLM 生成改进版本 |
-| **元变异** | 优化变异策略本身 |
-
----
-
-## 📊 评估维度
-
-```
-评估分数 = 任务完成度 × w₁ + 输出质量 × w₂ + 复杂度 × w₃ + 规范度 × w₄
-```
-
----
-
-## 🌟 高级特性
-
-- **跨域授粉**：不同领域的孢子交换基因
-- **思想病毒**：孢子在不同 agent 间传播
-- **涌现式进化**：自动涌现新的提示模式
 
 ---
 
@@ -112,4 +114,4 @@ MIT License - 欢迎开源贡献！
 
 ---
 
-**让提示词像生命一样进化** 🧬
+**让提示词像生命一样进化** 🧬🦋
